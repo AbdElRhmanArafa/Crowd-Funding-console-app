@@ -1,20 +1,26 @@
 
 #? const global variables  
 #? no const keyword variables in python so we can just make a global variable in upper case or make function return value    
-import os
-import sys 
+
+from API import *
 from API import Registration
 
 # ,lastName,Email,Password
 ROOTFIIE = os.path.dirname(__file__)
-DataBaseFile = ROOTFIIE + os.sep + "Database"
+DataBaseFile = ROOTFIIE + os.sep + "Database" + os.sep
 chooseWhatDoYouWant=0
 separatorBetweenLine="*"*50
+
+
 
 strMainScreen="""
 \t 1- Registrations 
 \t 0-Exit 
 """
+
+
+
+
 
 strMainScreen+=separatorBetweenLine
 while True:
