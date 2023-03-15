@@ -4,6 +4,7 @@
 
 from API import *
 from API import Registration
+from API import login
 
 # ,lastName,Email,Password
 ROOTFIIE = os.path.dirname(__file__)
@@ -15,6 +16,7 @@ separatorBetweenLine="*"*50
 
 strMainScreen="""
 \t 1- Registrations 
+\t 2- Login
 \t 0-Exit 
 """
 
@@ -30,6 +32,10 @@ while True:
         print("Please enter a valid choice")
     elif int(choiceWhatDoYouWant)==1:
         Registration.RegisterIsValid(DataBaseFile)
+    elif int(choiceWhatDoYouWant)==2:
+        Email=input("please enter your mail : ")
+        password=input("please enter your password")
+        login.logInSystem(Email,password,DataBaseFile)
     elif int(choiceWhatDoYouWant)==0:
         sys.exit("application will exit")
 
