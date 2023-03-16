@@ -25,7 +25,7 @@ def writeUserInformation(infoAboutUser,file):
         for key in infoAboutUser:
             csvFile.write(infoAboutUser[key])
             if key != "phoneNumber":
-                csvFile.write(" : ")
+                csvFile.write(":")
         csvFile.write("\n")
 
 
@@ -41,7 +41,7 @@ def notReplacedValue(listOfDistinctInfo,file):
     """
     with open(file, "r") as csvFile:    
         for line in csvFile:
-            UserData = line.split(" : ")
+            UserData = line.split(":")
             listOfDistinctInfo[2]+='\n'
             del UserData[1] #? delete last name from list
             del UserData[2] #? delete password from list
