@@ -5,6 +5,7 @@
 from API import *
 from API import Registration
 from API import login
+from API import Create
 
 # ,lastName,Email,Password
 ROOTFIIE = os.path.dirname(__file__)
@@ -35,7 +36,12 @@ while True:
     if userInfoSection:
         print(strMainLoginScreen.format(userInfoSection[0]))
         choiceWhatDoYouWant = input("Please your choice ? ")
-
+        if int(choiceWhatDoYouWant) == 1:
+            Create.validateProjectData(userInfoSection[0],DataBaseFile)
+        if int(choiceWhatDoYouWant) == 5:
+            userInfoSection = []
+        if int(choiceWhatDoYouWant) == 0:
+            sys.exit("applications will terminate")
     else:
         print(strMainScreen)
         choiceWhatDoYouWant = input("Please your choice ? ")
