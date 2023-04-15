@@ -1,4 +1,4 @@
-from API import os,re,sys
+from API import os, re, sys
 """ 
 the main goal of this code is to be reuseable 
 """
@@ -11,7 +11,8 @@ RULES = """
 
 """
 
-def writeUserInformation(infoAboutUser,file):
+
+def writeUserInformation(infoAboutUser, file):
     """
     this function just writes the user information in CVS file and the determined is :
     file order filed  (First Name,last Name , email, password , phone number)
@@ -19,9 +20,8 @@ def writeUserInformation(infoAboutUser,file):
         infoAboutUser (dict): have user information and it's valid ready to add
         DataBaseFile (string): global data base file to write user information in right locations
     """
-    
-    
-    with open(file,"a") as csvFile:
+
+    with open(file, "a") as csvFile:
         for key in infoAboutUser:
             csvFile.write(infoAboutUser[key])
             if key != "phoneNumber":
@@ -29,27 +29,26 @@ def writeUserInformation(infoAboutUser,file):
         csvFile.write("\n")
 
 
-
 #! /****************************************************************/
-def notReplacedValue(listOfDistinctInfo,file):
+def notReplacedValue(listOfDistinctInfo, file):
     """_summary_ this function may be not readable for human i work to improve it 
-                 
+
 
     Args:
         listOfDistinctInfo (list ): element list of distinct can not repeated values in file
         DataBaseFile (_type_):file location 
     """
-    with open(file, "r") as csvFile:    
+    with open(file, "r") as csvFile:
         for line in csvFile:
             UserData = line.split(":")
-            listOfDistinctInfo[2]+='\n'
-            del UserData[1] #? delete last name from list
-            del UserData[2] #? delete password from list
-            for index,field in enumerate(UserData):
-                if field==listOfDistinctInfo[index]:
-                   print (listOfDistinctInfo[index]+" : is already  used try another one  ")
-                   sys.exit()
-                    
+            listOfDistinctInfo[2] += '\n'
+            del UserData[1]  # ? delete last name from list
+            del UserData[2]  # ? delete password from list
+            for index, field in enumerate(UserData):
+                if field == listOfDistinctInfo[index]:
+                    print(listOfDistinctInfo[index] +
+                          " : is already  used try another one  ")
+                    sys.exit()
 
 
 #! /****************************************************************/
@@ -57,16 +56,16 @@ def RegisterIsValid(DataBaseFile):
     """
      Validate information and store it in the dictionary.
     """
-    listOfDistinctInfo=[]
+    listOfDistinctInfo = []
 
     firstName = input("Enter First Name : ")
-    pattern="[A-Za-z]{4,}"
-    while  not re.fullmatch(pattern, firstName) :
+    pattern = "[A-Za-z]{4,}"
+    while not re.fullmatch(pattern, firstName):
         print("*Please enter a valid first name only letters allowed ")
         firstName = input("Enter First Name : ")
     listOfDistinctInfo.append(firstName)
     lastName = input("Enter Last Name : ")
-    while not re.fullmatch(pattern, lastName) :
+    while not re.fullmatch(pattern, lastName):
         print("*Please enter a valid Last name only letters allowed ")
         lastName = input("Enter valid Last Name : ")
 
@@ -97,15 +96,9 @@ def RegisterIsValid(DataBaseFile):
     listOfDistinctInfo.append(phoneNumberValidInEg)
     infoAboutUser = {"firstName": firstName, "lastName": lastName,
                      "email": Email, "password": password, "phoneNumber": phoneNumberValidInEg}
-    # check if file exists 
-    file=DataBaseFile+"user_information.csv"
+    # check if file exists
+    file = DataBaseFile+"user_information.csv"
 
-    if  os.path.exists(file):
-        notReplacedValue(listOfDistinctInfo,file)
-    writeUserInformation(infoAboutUser,file)
-
-
-    
-
-
-        
+    if os.path.exists(file):
+        notReplacedValue(listOfDistinctInfo, file)
+    writeUserInformation(infoAboutUser, file)
